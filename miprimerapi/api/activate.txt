@@ -1,0 +1,8 @@
+fastapi-env\Scripts\activate.bat
+
+pip freeze
+
+
+uvicorn app:app --reload
+
+uvicorn app:app --host 10.1.105.65 --port 8000 --reload

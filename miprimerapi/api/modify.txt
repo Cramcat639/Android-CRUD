@@ -1,0 +1,13 @@
+{
+  "id": 3,
+  "username": "hectorModify",
+  "mail": "hector@gmail.com",
+  "password": "Elpajaroeslaclave69",
+  "isadmin": 0,
+  "isblock": 0
+}
+
+{
+"mail": "hector@gmail.com",
+"password": "Elpajaroeslaclave69"
+}
