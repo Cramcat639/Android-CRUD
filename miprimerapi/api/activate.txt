@@ -1,3 +1,5 @@
+py -m venv fastapi-env
+
 fastapi-env\Scripts\activate.bat
 
 pip freeze
@@ -5,4 +7,4 @@ pip freeze
 
 uvicorn app:app --reload
 
-uvicorn app:app --host 10.1.105.65 --port 8000 --reload
+uvicorn app:app --host 10.1.105.14 --port 8000 --reload

@@ -42,10 +42,10 @@ deactivate nondestructive
 if [ "$OSTYPE" = "cygwin" ] || [ "$OSTYPE" = "msys" ] ; then
     # transform D:\path\to\venv to /d/path/to/venv on MSYS
     # and to /cygdrive/d/path/to/venv on Cygwin
-    export VIRTUAL_ENV=$(cygpath "C:\Users\admin\Desktop\Mobiles M8\api\fastapi-env")
+    export VIRTUAL_ENV=$(cygpath "C:\Users\admin\AndroidStudioProjects\miprimerapi\api\fastapi-env")
 else
     # use the path as-is
-    export VIRTUAL_ENV="C:\Users\admin\Desktop\Mobiles M8\api\fastapi-env"
+    export VIRTUAL_ENV="C:\Users\admin\AndroidStudioProjects\miprimerapi\api\fastapi-env"
 fi
 
 _OLD_VIRTUAL_PATH="$PATH"
