@@ -13,6 +13,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.EditText;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
@@ -45,18 +48,16 @@ public class MainActivity extends AppCompatActivity {
 
                 Api api = new Api();
 
-                api.loginAsync(email, pass, new Api.ApiCallback() {
-                    @Override
-                    public void onApiResult(String result) {
-                        if (result != null) {
-                            // Procesar la respuesta del servidor según sea necesario
+                try {
+                    api.loginAsync(email, pass, new Api.ApiCallback() {
+                        @Override
+                        public void onApiResult(String result) throws JSONException {
                             handleApiResponse(result);
-                        } else {
-                            // Hubo un error en la operación de red
-                            showErrorDialog("Error de red");
                         }
-                    }
-                });
+                    });
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 
@@ -78,19 +79,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void handleApiResponse(String result) {
-        // Analizar y procesar la respuesta del servidor según el formato real de la respuesta
-        // Supongamos que la respuesta es un JSON como {"id": "123"}
-        // Puedes usar una biblioteca como Gson para un análisis JSON más robusto.
+        if (result != null) {
+            try {
+                JSONObject jsonObject = new JSONObject(result);
+                String userId = jsonObject.getString("id");
 
-        String userId = result.trim().replace("{\"id\": \"", "").replace("\"}", "");
-
-        if (!userId.isEmpty()) {
-            // La autenticación fue exitosa, puedes realizar acciones adicionales aquí
-            Intent intent = new Intent(MainActivity.this, Crud.class);
-            intent.putExtra("id", userId);
-            startActivity(intent);
+                // La autenticación fue exitosa, puedes realizar acciones adicionales aquí
+                Intent intent = new Intent(MainActivity.this, Crud.class);
+                intent.putExtra("id", userId);
+                startActivity(intent);
+            } catch (JSONException e) {
+                showErrorDialog("Error al analizar la respuesta del servidor");
+            }
         } else {
-            showErrorDialog("Inicio de sesión fallido");
+            showErrorDialog("Email o contraseña incorrectos");
         }
     }
 

@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import java.util.List;
 
-public class Crud extends AppCompatActivity {
+public class Crud extends AppCompatActivity implements Api.CredentialsById.OnTaskCompleted {
     private int id_1;
 
     @Override
@@ -26,22 +26,12 @@ public class Crud extends AppCompatActivity {
         TextView tvPass = findViewById(R.id.pass);
         TextView tvEmail = findViewById(R.id.email);
 
-        Api api = new Api();
-        DB db = new DB(context); //OJO
-
         String id = getIntent().getStringExtra("id");
         id_1 = Integer.parseInt(id);
 
-        User user = api.getUserById(id);
-
-        if (user != null) {
-            tvNick.setText(user.getNick());
-            tvEmail.setText(user.getEmail());
-            tvPass.setText(user.getPass());
-        } else {
-            String mensaje = "Usuario no encontrado";
-            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
-        }
+        // Ejecuta la tarea asíncrona para obtener la información del usuario
+        Api.CredentialsById credentialsById = new Api.CredentialsById(this);
+        credentialsById.execute(id);
 
 
         Button eliminar = findViewById(R.id.eliminar);
@@ -106,5 +96,20 @@ public class Crud extends AppCompatActivity {
                 }
             }
         });
+    }
+    @Override
+    public void onTaskCompleted(List<String> result) {
+        if (result != null) {
+            TextView tvNick = findViewById(R.id.nick);
+            TextView tvEmail = findViewById(R.id.email);
+            TextView tvPass = findViewById(R.id.pass);
+
+            tvNick.setText(result.get(0));
+            tvEmail.setText(result.get(1));
+            tvPass.setText(result.get(2));
+        } else {
+            String mensaje = "Usuario no encontrado";
+            Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+        }
     }
 }
