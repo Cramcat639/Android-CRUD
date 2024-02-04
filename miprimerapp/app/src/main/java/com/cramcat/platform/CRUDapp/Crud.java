@@ -1,4 +1,4 @@
-package com.cramcat.platform.loginui;
+package com.cramcat.platform.CRUDapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 

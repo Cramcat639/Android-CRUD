@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.cramcat.platform.loginui">
+    package="com.cramcat.platform.CRUDapp">
 
     <application
         android:allowBackup="true"
@@ -11,32 +11,27 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup">
+        
         <activity
-            android:name=".Admin"
-            android:configChanges="orientation|screenSize"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
-            android:windowSoftInputMode="stateHidden|adjustPan"/>
-        <activity
-            android:name=".Password"
+            android:name="com.cramcat.platform.CRUDapp.Password"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".Register"
+            android:name="com.cramcat.platform.CRUDapp.Register"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".Crud"
+            android:name="com.cramcat.platform.CRUDapp.Crud"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan" />
         <activity
-            android:name=".MainActivity"
+            android:name="com.cramcat.platform.CRUDapp.MainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/Theme.AppCompat.NoActionBar"
             android:windowSoftInputMode="stateHidden|adjustPan">

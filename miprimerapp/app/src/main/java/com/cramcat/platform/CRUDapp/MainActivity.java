@@ -1,4 +1,4 @@
-package com.cramcat.platform.loginui;
+package com.cramcat.platform.CRUDapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     ImageView imageView;
     TextView textView;
-    int count = 0;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -26,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         Context context = this;
-        final boolean[] validacion = new boolean[1];
         Funciones pop = new Funciones();
 
         imageView = findViewById(R.id.imageView);

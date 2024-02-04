@@ -112,7 +112,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="23dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -132,7 +132,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:textColor="@android:color/white"
-                android:textSize="16sp" />
+                android:textSize="23dp" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
