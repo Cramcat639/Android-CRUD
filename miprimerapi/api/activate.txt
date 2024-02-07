@@ -1,6 +1,7 @@
 py -m venv fastapi-env
 
-fastapi-env\Scripts\activate.bat
+fastapi-env\Scripts\activate.bat    CMD
+.\fastapi-env\Scripts\Activate      VISUAL STUDIO CODE
 
 pip freeze
 

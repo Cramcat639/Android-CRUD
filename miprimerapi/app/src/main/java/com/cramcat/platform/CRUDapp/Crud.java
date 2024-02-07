@@ -2,19 +2,26 @@ package com.cramcat.platform.CRUDapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+
 import java.util.List;
 
 public class Crud extends AppCompatActivity implements Api.CredentialsById.OnTaskCompleted {
     private int id_1;
-
+    private boolean isPasswordVisible = false;
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +39,23 @@ public class Crud extends AppCompatActivity implements Api.CredentialsById.OnTas
         // Ejecuta la tarea asíncrona para obtener la información del usuario
         Api.CredentialsById credentialsById = new Api.CredentialsById(this);
         credentialsById.execute(id);
+
+        EditText editTextPassword = findViewById(R.id.pass);
+
+        editTextPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // El usuario ha hecho clic en el icono de la contraseña
+                        togglePasswordVisibility(editTextPassword);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
 
         Button eliminar = findViewById(R.id.eliminar);
@@ -111,5 +135,15 @@ public class Crud extends AppCompatActivity implements Api.CredentialsById.OnTas
             String mensaje = "Usuario no encontrado";
             Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
         }
+    }
+    private void togglePasswordVisibility(EditText editText) {
+        if (isPasswordVisible) {
+            // Ocultar la contraseña
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            // Mostrar la contraseña
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+        isPasswordVisible = !isPasswordVisible;
     }
 }

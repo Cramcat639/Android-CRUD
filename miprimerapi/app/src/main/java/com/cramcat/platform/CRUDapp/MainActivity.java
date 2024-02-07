@@ -6,6 +6,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -21,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     EditText tvemail;
     EditText tvPass;
+    private boolean isPasswordVisible = false;
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -39,6 +42,23 @@ public class MainActivity extends AppCompatActivity {
 
         Button registrarse = findViewById(R.id.registrarse);
         Button iniciar = findViewById(R.id.iniciar);
+
+        EditText editTextPassword = findViewById(R.id.pass);
+
+        editTextPassword.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_RIGHT = 2;
+                if (event.getAction() == MotionEvent.ACTION_UP) {
+                    if (event.getRawX() >= (editTextPassword.getRight() - editTextPassword.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // El usuario ha hecho clic en el icono de la contraseña
+                        togglePasswordVisibility(editTextPassword);
+                        return true;
+                    }
+                }
+                return false;
+            }
+        });
 
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -100,5 +120,15 @@ public class MainActivity extends AppCompatActivity {
         // Muestra un cuadro de diálogo de error con el mensaje proporcionado
         Funciones pop = new Funciones();
         pop.showNewDialog(MainActivity.this, "Error", errorMessage);
+    }
+    private void togglePasswordVisibility(EditText editText) {
+        if (isPasswordVisible) {
+            // Ocultar la contraseña
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        } else {
+            // Mostrar la contraseña
+            editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+        }
+        isPasswordVisible = !isPasswordVisible;
     }
 }

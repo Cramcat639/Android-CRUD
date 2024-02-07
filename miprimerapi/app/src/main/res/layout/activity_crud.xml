@@ -131,24 +131,28 @@
           android:textSize="23dp" />
     </com.google.android.material.textfield.TextInputLayout>
 
+
     <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColorHint="#96ffffff"
         android:theme="@style/EditScreenTextInputLayoutStyle">
 
-      <EditText
+      <com.google.android.material.textfield.TextInputEditText
           android:id="@+id/pass"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
           android:drawablePadding="16dp"
-          android:drawableEnd="@drawable/ic_lock_white_24dp"
           android:fontFamily="@font/calibri"
           android:hint="Contraseña"
           android:inputType="textPassword"
           android:maxLines="1"
           android:textColor="@android:color/white"
-          android:textSize="23dp" />
+          android:textSize="23dp"
+          android:drawableEnd="@drawable/ic_lock_white_24dp"
+          android:clickable="true"
+          android:focusable="true"
+          android:focusableInTouchMode="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <LinearLayout
